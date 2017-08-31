@@ -1,4 +1,6 @@
 *.d
 *.o
 *.a
-/Debug
+Debug/
+Release/
+.vs/
