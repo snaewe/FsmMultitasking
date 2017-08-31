@@ -32,12 +32,19 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS := 
+SUBDIRS :=  \
+../include/ \
+../include/libraries/ \
+../include/libraries/arduino-fsm/ \
+../src/ \
+../src/libraries/ \
+../src/libraries/arduino-fsm/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../Sketch.cpp
+../Sketch.cpp \
+../src/libraries/arduino-fsm/Fsm.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -47,16 +54,20 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-Sketch.o
+Sketch.o \
+src/libraries/arduino-fsm/Fsm.o
 
 OBJS_AS_ARGS +=  \
-Sketch.o
+Sketch.o \
+src/libraries/arduino-fsm/Fsm.o
 
 C_DEPS +=  \
-Sketch.d
+Sketch.d \
+src/libraries/arduino-fsm/Fsm.d
 
 C_DEPS_AS_ARGS +=  \
-Sketch.d
+Sketch.d \
+src/libraries/arduino-fsm/Fsm.d
 
 OUTPUT_FILE_PATH +=multitasking.elf
 
@@ -76,10 +87,19 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
 ./%.o: .././%.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=8000000L -DARDUINO=10803 -DARDUINO_AVR_GEMMA -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0c9f -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\include" -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\variants\gemma"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -w -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\gcc\dev\attiny85" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=8000000L -DARDUINO=10803 -DARDUINO_AVR_GEMMA -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0c9f -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\include" -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\variants\gemma" -I"..\include\libraries\arduino-fsm"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -w -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\gcc\dev\attiny85" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/libraries/arduino-fsm/%.o: ../src/libraries/arduino-fsm/%.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=8000000L -DARDUINO=10803 -DARDUINO_AVR_GEMMA -DARDUINO_ARCH_AVR -DUSB_VID=0x2341 -DUSB_PID=0x0c9f -DUSB_MANUFACTURER="\"Arduino LLC\""  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\include" -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\variants\gemma" -I"..\include\libraries\arduino-fsm"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -w -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.2.118\gcc\dev\attiny85" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
