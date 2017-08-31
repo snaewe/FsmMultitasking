@@ -20,6 +20,15 @@ void on_led2_off_enter();
 #define LED1_PIN 10
 #define LED2_PIN 11
 
+#ifdef __AVR_ATtiny85__
+class FakeSerial
+{
+public:
+	void println(const char*) {}
+	void begin(int) {}
+};
+FakeSerial Serial;
+#endif
 void on_led1_on_enter() {
     Serial.println("on_led1_on_enter");
     digitalWrite(LED1_PIN, HIGH);
